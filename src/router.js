@@ -5,9 +5,8 @@ Vue.use(VueRouter);
 
 import Topics from './components/Topics.vue'
 import Topic from './components/Topic.vue'
-import Users from './components/Users.vue'
 import Login from './components/Login.vue'
-
+import Register from './components/Register.vue'
 const routes = [
     {
         path:'/',
@@ -18,12 +17,12 @@ const routes = [
         component:Topic
     },
     {
-        path:'/users',
-        component:Users
-    },
-    {
         path:'/login',
         component:Login
+    },
+    {
+        path:'/register',
+        component:Register
     }
 
 ]

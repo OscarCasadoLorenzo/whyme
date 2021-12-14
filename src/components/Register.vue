@@ -6,6 +6,12 @@
                     <v-form v-model="valid">
                         <v-card-text>
                             <v-text-field
+                                prepend-icon="mdi-account" 
+                                v-model="name" 
+                                label="Name"
+                                :rules="rules_name"
+                            />
+                            <v-text-field
                                 prepend-icon="mdi-email" 
                                 v-model="email" 
                                 label="Email"
@@ -16,23 +22,23 @@
                                 v-model="password" 
                                 label="Password" 
                                 type="password"
+                                :rules="rules_password"
                             />
-                            <v-btn 
-                                :disabled="!valid" 
-                                class="primary mt-2" 
-                                block
-                                @click="login"
-                                >Login
-                            </v-btn>
+                            <v-btn :disabled="!valid" class="primary mt-2" block>Register</v-btn>
 
                             <div class="my-2" >
                                 <span> 
-                                    ¿No account?
-                                    <router-link class="text-xs-right" to="/register">Register</router-link>
+                                    ¿Having an account?
+                                    <router-link class="text-xs-right" to="/login">Login</router-link>
                                 </span>
                             </div>
                         </v-card-text>
                     </v-form>
+                        
+                    <v-alert type="error" color="red" v-show="Boolean(error)">
+                        {{error}}
+                    </v-alert>
+
                 </v-card>
             </v-flex>
         </v-layout>
@@ -43,18 +49,6 @@
 import {mixinForm} from '../mixins';
 export default {
     mixins:[mixinForm],
-    methods:{
-        login(){
-            this.$store.dispatch("login", {
-                email: this.email,
-                password:this.password,
-            }).then((user)=>{
-                this.$store.commit('setUser', response.data.user);
-            }).catch((msg)=>{
-                this.error = msg
-            })
-        }
-    }
 }
 </script>
 

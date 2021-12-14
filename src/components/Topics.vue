@@ -1,5 +1,5 @@
 <template>
-    <v-container>  
+    <v-container> 
         <v-card class= "mb-5" v-for="topic in topics" :key=topic._id :to="'/topics/'+topic._id">
             <v-card-title>{{topic.title}}</v-card-title>
             <v-card-text>{{topic.content}}</v-card-text>
