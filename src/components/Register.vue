@@ -12,6 +12,12 @@
                                 :rules="rules_name"
                             />
                             <v-text-field
+                                prepend-icon="mdi-account" 
+                                v-model="surname" 
+                                label="Surname"
+                                :rules="rules_name"
+                            />
+                            <v-text-field
                                 prepend-icon="mdi-email" 
                                 v-model="email" 
                                 label="Email"
@@ -24,7 +30,18 @@
                                 type="password"
                                 :rules="rules_password"
                             />
-                            <v-btn :disabled="!valid" class="primary mt-2" block>Register</v-btn>
+                            <!--
+                            <v-file-input
+                                :rules="rules_image"
+                                v-model="image"
+                                accept="image/png, image/jpeg, image/bmp"
+                                placeholder="Pick an avatar"
+                                prepend-icon="mdi-camera"
+                                label="Avatar"
+                            ></v-file-input>
+                            -->
+
+                            <v-btn :disabled="!valid" class="primary mt-2" block @click="register">Register</v-btn>
 
                             <div class="my-2" >
                                 <span> 
@@ -48,7 +65,22 @@
 <script>
 import {mixinForm} from '../mixins';
 export default {
-    mixins:[mixinForm],
+    mixins: [mixinForm],
+    methods: {
+        register(){
+            this.$store.dispatch("register", {
+                email: this.email,
+                password:this.password,
+                image:this.image,
+                name:this.name,
+                surname:this.surname
+            }).then((user)=>{
+                this.$router.push("/login");
+            }).catch((msg)=>{
+                this.error = msg
+            })
+        }
+    }
 }
 </script>
 

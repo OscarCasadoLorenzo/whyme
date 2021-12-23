@@ -7,6 +7,7 @@ import Topics from './components/Topics.vue'
 import Topic from './components/Topic.vue'
 import Login from './components/Login.vue'
 import Register from './components/Register.vue'
+import Users from './components/Users.vue'
 const routes = [
     {
         path:'/',
@@ -23,6 +24,10 @@ const routes = [
     {
         path:'/register',
         component:Register
+    },
+    {
+        path:'/users',
+        component:Users
     }
 
 ]

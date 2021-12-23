@@ -3,9 +3,12 @@ const mixinForm = {
         return {
             error: '',
             valid: false,
+            
             name:'',
+            surname:'',
             email : '',
             password : '',
+            image: '' ,
 
             rules_name :[
                 (name) => name.length > 0 || 'Not a valid username',
@@ -15,6 +18,9 @@ const mixinForm = {
             ],
             rules_password :[
                 (password) => password.length > 0 || 'Must type the password'
+            ],
+            rules_image : [
+                (image) => !image || image.size < 2000000 || 'Avatar size should be less than 2 MB'
             ]
         }
     },

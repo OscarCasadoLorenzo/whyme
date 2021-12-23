@@ -5,7 +5,13 @@ Vue.use(Vuex);
 
 const storage = {
     state:{
-        user : null
+        user : {
+            name:'',
+            surname:'',
+            email : '',
+            password : '',
+            image: null,
+        }
     },
 
     getters:{
@@ -17,20 +23,35 @@ const storage = {
     mutations:{
         setUser(state,user){
             state.user = user;
+        },
+
+        setImage(state, image){
+            state.user.image = image;
         }
     },
     
     actions:{
-        login({commit}, credentials){
+        login(context, credentials){
             axios.post(
                 'http://localhost:3999/whyme/login',
                 credentials
             ).then((response) =>{
+                localStorage.setItem("token", response.data.token)
+                context.commit('setUser', response.data.user)
+ 
+            })  
+        },
 
-                if(response.data.msg)
-                    throw response.data.msg
-            })
-            
+        logout(context){
+            localStorage.removeItem("token");
+            context.commit('setUser', null);
+        },
+
+        register(context, credentials){
+            axios.post(
+                'http://localhost:3999/whyme/register/',
+                credentials
+            )
         }
     }
     

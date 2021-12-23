@@ -20,9 +20,13 @@
           <v-icon>mdi-login</v-icon>
         </v-btn>
 
+        <v-btn icon v-if="user" @click="logout">
+          <v-icon>mdi-logout</v-icon>
+        </v-btn>
+
         <v-list-item v-if="user">
             <v-list-item-avatar>
-              <img src="https://lh3.googleusercontent.com/e_GY4PanUOQFBg67GT1P2F4LKeUsz5zgRuo2Xr75tSvQiNuwDTGpgn0mhESmdTQmvdKLBLC-FGM3NgPG3CkD0Ikta2bSEj4PciRcnQ=w1064-v0">
+              <v-img :src="'http://localhost:3999/whyme/avatar/' + user.image"></v-img>
             </v-list-item-avatar>
             <v-list-item-title class="ml-2">{{user.name}}</v-list-item-title>
         </v-list-item>
@@ -32,7 +36,7 @@
 
 
     <v-main>
-      <router-view></router-view>
+      <router-view v-bind:user="user"></router-view>
     </v-main>
   </v-app>
 
@@ -41,15 +45,18 @@
 <script>
 
 export default {
+  
   computed:{
     user(){
       return this.$store.getters.getUser
     }
   },
+  methods: {
+        logout(){
+            this.$store.dispatch("logout")
+        }
+    },
 
   name: 'App',
-
-  components: {
-  },
 };
 </script>

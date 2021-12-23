@@ -41,15 +41,16 @@
 
 <script>
 import {mixinForm} from '../mixins';
+
 export default {
-    mixins:[mixinForm],
-    methods:{
+    mixins: [mixinForm],
+    methods: {
         login(){
             this.$store.dispatch("login", {
                 email: this.email,
                 password:this.password,
             }).then((user)=>{
-                this.$store.commit('setUser', response.data.user);
+                this.$router.push("/");
             }).catch((msg)=>{
                 this.error = msg
             })
